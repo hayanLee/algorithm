@@ -1,16 +1,23 @@
 #오큰수
-import sys
-input = sys.stdin.readline
-
 n = int(input())
 data = list(map(int, input().split()))
 
 st = []
-result = [-1 for _ in range(n)]
+result = [0 for _ in range(n)]
 
-for i in range(n):
-    while st and data[st[-1]] < data[i]:
-        result[st.pop()] = data[i]
-    st.append(i)
+result[-1] = -1
+for i in range(len(data)-2, -1, -1):
+    st.append(data[i+1])
+
+    while len(st) > 0 and st[-1] <= data[i]:
+        st.pop()
+    if len(st) == 0:
+        result[i] = -1
+    else:
+        result[i] = st[-1]
 
 print(*result)
+    #자신의 차례 때 자기 오른쪽 값을 st에 넣음
+    #자기보다 작으면 pop
+    #크면 오큰수
+    #st이 비면 -1
