@@ -1,5 +1,4 @@
 def solution(s):
-    answer = 0
     st = []
     
     for x in s:
@@ -8,6 +7,4 @@ def solution(s):
         else:
             st.pop()
     
-    if not st:
-        answer = 1
-    return answer
+    return int(not st)
