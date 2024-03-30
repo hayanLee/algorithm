@@ -1,42 +1,45 @@
-# 토마토
+#토마토
+import sys
 from collections import deque
-n, m = map(int, input().split())
-graph = [list(map(int, input().split())) for _ in range(m)]
+input = sys.stdin.readline
 
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
+dx = [-1,0,1,0]
+dy = [0,1,0,-1]
 
-q = deque()  # 큐
-for i in range(m):
-    for j in range(n):
-        if graph[i][j] == 1:
-            q.append((i, j))  # 처음 토마토 위치 큐에 넣기
-
+q = deque()
 
 def bfs():
     while q:
         tmpX, tmpY = q.popleft()
-        for k in range(4):
-            nx = tmpX + dx[k]
-            ny = tmpY + dy[k]
+        for i in range(4):
+            nx = tmpX + dx[i]
+            ny = tmpY + dy[i]
 
-            # 그래프 범위 내 & 벽이 아니면
-            if nx >= 0 and ny >= 0 and nx < m and ny < n and graph[nx][ny] == 0:
-                q.append((nx, ny))
-                graph[nx][ny] = graph[tmpX][tmpY] + 1  # 이전 날짜 + 1
+            if 0<=nx<n and 0<=ny<m and graph[nx][ny] == 0: #범위 내 and 방문 안함
+                q.append((nx,ny))
+                dist[nx][ny] = dist[tmpX][tmpY]+1 #현재 거리 +1
+                graph[nx][ny] = -1 #방문 처리
 
+m,n = map(int, input().split()) #세로 가로
+graph = [list(map(int, input().split())) for _ in range(n)]
+dist = [[0]*m for _ in range(n)] # 거리 리스트
 
-bfs()  # 탐색 실행
+for i in range(n):
+    for j in range(m):
+        if graph[i][j] == 1:
+            dist[i][j] = 1
+            q.append((i,j)) #시작하는 곳 큐에 넣기
+
+bfs()
 
 flag = True
-
-for i in range(m):
-    for j in range(n):
+for i in range(n):
+    for j in range(m):
         if graph[i][j] == 0:
             flag = False
             break
 
-if (flag):
-    print(max(max(row) for row in graph) - 1)
+if flag:
+    print(max(max(row) for row in dist) - 1)
 else:
     print(-1)
