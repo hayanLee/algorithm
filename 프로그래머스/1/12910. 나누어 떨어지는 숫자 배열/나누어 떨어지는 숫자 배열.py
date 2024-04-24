@@ -1,7 +1,8 @@
 def solution(arr, divisor):
-    answer = sorted([i for i in arr if i%divisor==0])
-    
-    if not answer:
-        answer = [-1]
-    
-    return answer
+    answer = []
+    for x in arr:
+        if x%divisor == 0:
+            answer.append(x)
+        
+    if len(answer) == 0: answer.append(-1)
+    return sorted(answer)
