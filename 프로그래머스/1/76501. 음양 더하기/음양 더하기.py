@@ -1,8 +1,8 @@
 def solution(absolutes, signs):
-    sum = 0
-    for absolute,sign in zip(absolutes, signs):
-        if sign:
-            sum+=absolute
+    answer = []
+    for num, sign in zip(absolutes, signs):
+        if sign == False:
+            answer.append(-num)
         else:
-            sum-=absolute
-    return sum
+            answer.append(num)
+    return sum(answer)
