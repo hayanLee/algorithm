@@ -7,10 +7,9 @@ def solution(answers):
     score = [0] * 3 # 각 학생 점수
     
     for idx, answer in enumerate(answers): #문제번호, 답
-        for stu in range(3): #3명의 학생
-            if answer == patterns[stu][idx%len(patterns[stu])]:
+        for stu, pattern in enumerate(patterns): #학생, 개인 답
+            if answer == pattern[idx % len(pattern)]:
                 score[stu]+=1
-            # print(answer, stu, patterns[stu][idx%len(patterns[stu])])
     
     max_score = max(score)
     result = []
