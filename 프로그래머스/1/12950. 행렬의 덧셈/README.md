@@ -1,10 +1,10 @@
 # [level 1] 행렬의 덧셈 - 12950 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12950) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12950?language=javascript) 
 
 ### 성능 요약
 
-메모리: 20.7 MB, 시간: 28.71 ms
+메모리: 67.6 MB, 시간: 7.91 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 04월 28일 18:41:48
+2024년 05월 15일 11:27:00
 
 ### 문제 설명
 
