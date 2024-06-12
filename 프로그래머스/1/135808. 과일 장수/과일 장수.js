@@ -3,9 +3,7 @@ function solution(k, m, score) {
     const box = parseInt(score.length / m)
     const out = parseInt(score.length % m)
     
-    score.sort((a,b) => a-b)
-    
-    const apples = score.slice(out)
+    const apples = score.sort((a,b) => a-b).slice(out)
     
     for(let i=0; i<apples.length; i+=m){
         answer+= apples[i] * m
