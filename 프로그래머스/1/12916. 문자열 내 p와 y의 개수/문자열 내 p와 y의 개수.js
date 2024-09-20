@@ -1,11 +1,7 @@
 function solution(s){
     var answer = true;
-    const splitedStr = s.toLowerCase().split('')
+    const splitedP = s.toLowerCase().split('p');
+    const splitedY = s.toLowerCase().split('y');
     
-    let cntP = 0;
-    let cntY = 0;
-    
-    splitedStr.forEach((ch)=> ch==='p' ? cntP++ : (ch==='y'? cntY++ : ''))
-
-    return cntP === cntY;
+    return splitedP.length === splitedY.length;
 }
