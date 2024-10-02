@@ -1,3 +1,4 @@
 function solution(x, n) {
-    return Array(n).fill(x).map((v,i) => v*(i+1))
+    const arr = Array(n).fill(x);
+    return arr.map((num, i) => num*(i+1));
 }
