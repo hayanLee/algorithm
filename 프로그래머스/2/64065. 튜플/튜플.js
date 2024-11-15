@@ -1,13 +1,14 @@
 function solution(s) {
-    var answer = [];
     //집합 기호 제거 후, 길이로 정렬
-    const tuples = s.replace('{{', '').replace('}}', '').split("},{").sort((a,b) => a.length-b.length)
+    const tuples = s.slice(2, -2).split("},{").sort((a,b) => a.length-b.length)
     
-    tuples.forEach(tuple => {
-        let splitedTuple = tuple.split(',')
-        let t = splitedTuple.find(e => !answer.includes(e))
-        answer.push(t) 
-    })
+    const result = tuples.reduce((acc, elements) => {
+        let splitedTuple = elements.split(',')
+        let t = splitedTuple.find(e => !acc.includes(e))
+        acc.push(t) 
+        return acc
+    }, [])
     
-    return answer.map(e => parseInt(e));
+    console.log(result)
+    return result.map(Number);
 }
