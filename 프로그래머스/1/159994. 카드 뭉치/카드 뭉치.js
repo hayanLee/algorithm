@@ -1,9 +1,12 @@
-function solution(cards1, cards2, goal) {
-   for(const ch of goal) {
-       if(cards1[0] == ch) cards1.shift();
-       else if(cards2[0] == ch) cards2.shift();
-       else return "No"
+function solution(cards1, cards2, goal) {    
+    let aIdx = 0;
+    let bIdx = 0;
+    
+    for(const target of goal){
+        if(aIdx < cards1.length && cards1[aIdx] === target) aIdx++;
+        else if(bIdx < cards2.length && cards2[bIdx] === target) bIdx++;
+        else return "No"
     }
-    return "Yes"
-
+    
+    return "Yes";
 }
