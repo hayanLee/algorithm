@@ -1,4 +1,6 @@
 from collections import deque
+from sys import stdin
+input = stdin.readline
 
 arr = [i+1 for i in range(int(input()))]
 dq = deque() #초기화
