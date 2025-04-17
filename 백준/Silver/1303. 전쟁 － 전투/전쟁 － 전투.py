@@ -1,38 +1,30 @@
-from collections import deque
-N, M= map(int, input().split())
-graph = [list(input()) for _ in range(M)]
-visited = [[False]*N for _ in range(M)] #방문 배열
-# 상하좌우
-dx = [-1,1,0,0];
-dy=[0,0,-1,1];
+n, m = map(int, input().split()) #가로 크기, 세로 크기
+graph = [list(input()) for _ in range(m)]
+visited = [[False]*n for _ in range(m)] # 방문 배열
 
-b,w=0,0
+w,b = 0,0
 
-def bfs(x,y):
-  dq = deque([(x,y)])
-  visited[x][y] = True
+#상하좌우
+dx = [-1,1,0,0]
+dy = [0,0,-1,1] 
+
+def dfs(x,y,team):
   cnt = 1
+  visited[x][y] = True # 방문처리
 
-  while dq:
-    cx, cy = dq.popleft()
-    for i in range(4):
-      nx = cx+dx[i]
-      ny = cy+dy[i]
-    
-      if 0<=nx<M and 0<=ny<N and not visited[nx][ny] and graph[cx][cy] == graph[nx][ny]:
-        visited[nx][ny] = True
-        dq.append((nx,ny))
-        cnt+=1
+  for i in range(4):
+    nx, ny = x + dx[i], y + dy[i]
+    if 0<=nx<m and 0<=ny<n and not visited[nx][ny] and graph[nx][ny] == team:
+      cnt += dfs(nx,ny,team)
+  
   return cnt
 
-
-for i in range(M):
-  for j in range(N):
+for i in range(m):
+  for j in range(n):
     if not visited[i][j]:
-      ans = bfs(i,j)
       if graph[i][j] == 'W':
-        w+=ans**2
+        w+=dfs(i,j,'W')**2
       else:
-        b+=ans**2
+        b+=dfs(i,j,'B')**2
 
-print(w, b)
+print(w,b)
