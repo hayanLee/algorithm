@@ -1,6 +1,8 @@
 # https://www.acmicpc.net/problem/2110
 
 # c개의 공유기를 '인접한 공유기간의 최소 거리'를 최대로
+import sys
+input = sys.stdin.readline
 
 N,C = map(int, input().split())
 house_per_distance = [int(input()) for _ in range(N)]
