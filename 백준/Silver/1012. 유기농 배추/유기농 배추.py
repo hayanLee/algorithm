@@ -1,53 +1,48 @@
-#유기농 배추
 import sys
-from collections import deque
-
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(10**6)  # 재귀 깊이 제한 해제
 input = sys.stdin.readline
 
-t = int(input()) #테스트 개수
+# 방향 벡터 (상, 우, 하, 좌)
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
 
-dx = [-1,0,1,0]
-dy = [0,1,0,-1]
-
-def dfs(x,y):
-    graph[x][y] = 0 # 방문처리
+# 재귀 DFS
+def dfs_recur(x, y):
+    graph[y][x] = 0  # 방문 처리
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
+        if 0 <= nx < M and 0 <= ny < N and graph[ny][nx] == 1:
+            dfs_recur(nx, ny)
 
-        if 0<=nx<n and 0<=ny<m and graph[nx][ny]==1:
-            dfs(nx,ny)
+# 스택 DFS
+def dfs_stack(x, y):
+    stack = [(x, y)]
+    while stack:
+        cx, cy = stack.pop()
+        if graph[cy][cx] == 1:  # 아직 방문 안 했으면
+            graph[cy][cx] = 0
+            for i in range(4):
+                nx = cx + dx[i]
+                ny = cy + dy[i]
+                if 0 <= nx < M and 0 <= ny < N and graph[ny][nx] == 1:
+                    stack.append((nx, ny))
 
-# def bfs(x,y):
-#     q = deque([(x,y)])
-#     graph[x][y] = 0 #방문처리
+T = int(input())
+for _ in range(T):
+    M, N, K = map(int, input().split())  # M=가로, N=세로
+    graph = [[0] * M for _ in range(N)]
 
-#     while q:
-#         tmpX, tmpY = q.popleft()
-#         for i in range(4):
-#             nx = tmpX + dx[i]
-#             ny = tmpY + dy[i]
+    for _ in range(K):
+        x, y = map(int, input().split())
+        graph[y][x] = 1  # 좌표 저장 (행=y, 열=x)
 
-#             if 0<=nx<n and 0<=ny<m and graph[nx][ny]==1:
-#                 q.append((nx,ny))
-#                 graph[nx][ny] = 0 # 방문 처리
+    worm_cnt = 0
+    for y in range(N):
+        for x in range(M):
+            if graph[y][x] == 1:
+                dfs_recur(x, y)
+                # dfs_stack(x, y)
+                worm_cnt += 1
 
-for _ in range(t):
-    n,m,k = map(int, input().split()) #가로/세로/배추개수
-    graph = [[0]*m for _ in range(n)] #n*m
-    cnt = 0 #총 마리 수
-
-    for _ in range(k):
-        a, b = map(int, input().split()) #배추 x, y좌표
-        graph[a][b] = 1
-
-    for i in range(n):
-        for j in range(m):
-            if graph[i][j] == 1:
-                dfs(i,j)
-                # bfs(i,j)
-                cnt+=1 #탐색이 종료되면 영역 1증가
-    
-    print(cnt)
-
+    print(worm_cnt)
