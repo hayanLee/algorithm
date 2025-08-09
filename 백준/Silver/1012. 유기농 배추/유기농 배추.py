@@ -41,8 +41,8 @@ for _ in range(T):
     for y in range(N):
         for x in range(M):
             if graph[y][x] == 1:
-                dfs_recur(x, y)
-                # dfs_stack(x, y)
+                # dfs_recur(x, y)
+                dfs_stack(x, y)
                 worm_cnt += 1
 
     print(worm_cnt)
