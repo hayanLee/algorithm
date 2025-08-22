@@ -1,6 +1,10 @@
+# 가장 많은 종류의 폰켓몬을 선택하는 방법에서 종류 개수
 def solution(nums):
-    nums_set = set(nums)
+    answer = 0
+    pick_cnt = len(nums)//2 # 골라야하는 개수
     
-    k = len(nums)//2 #가져갈 수 있는 마리
-    
-    return min(k, len(nums_set))
+    pd = {}
+    for x in nums:
+        pd[x] = pd.get(x, 0) + 1
+        
+    return min(pick_cnt, len(pd))
