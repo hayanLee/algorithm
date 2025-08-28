@@ -1,5 +1,10 @@
 def solution(numbers):
-    sortedNums = sorted(list(map(str, numbers)), key=lambda x: x*3, reverse=True)
-    answer = str(int(''.join(sortedNums)))
-            
+    answer = ''
+    lts = list(map(str, numbers))
+    sorted_lts = sorted(lts, key = lambda x : x*3, reverse = True)
+    
+    answer = ''.join(sorted_lts)
+    if answer[0] == '0':
+        return '0'
+    
     return answer
