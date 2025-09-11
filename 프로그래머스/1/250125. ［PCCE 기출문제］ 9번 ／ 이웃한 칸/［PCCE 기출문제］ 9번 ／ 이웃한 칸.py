@@ -1,14 +1,11 @@
 def solution(board, h, w):
-    answer = 0 
+    answer = 0
     n = len(board)
-    dh = [-1,0,1,0]
-    dw = [0,1,0,-1]
+    dx = [-1,0,1,0]
+    dy = [0,1,0,-1]
     
     for i in range(4):
-        nh = h + dh[i]
-        nw = w + dw[i]
-        if 0<=nh<n and 0<=nw<n:
-            if board[nh][nw] == board[h][w]:
-                answer+=1
+        if 0<=h+dx[i]<n and 0<=w+dy[i]<n and board[h+dx[i]][w+dy[i]] == board[h][w]:
+            answer+=1
     
     return answer
